@@ -42,6 +42,7 @@ deaths %>%
   theme_bw() +
   theme(legend.position = "none")
 
+
 cases <- data %>% 
   group_by(akl, fall_dt) %>% 
   summarise(cases = sum(fallklasse_3))
@@ -108,6 +109,4 @@ death_share %>%
        subtitle = "nach Altersklasse, Daten Schweiz: BAG", y = "Tote pro Anzahl Positive", x = "") +
   theme_bw() +
   theme(legend.position = "none")
-
-
   
