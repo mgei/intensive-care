@@ -13,3 +13,8 @@
 
 ![](growth_rate.png)
 
+# data
+
+archived BAG data: https://www.functor.xyz/covid_19b/
+
+props to https://github.com/openZH/covid_19/issues/185#issuecomment-604267155
