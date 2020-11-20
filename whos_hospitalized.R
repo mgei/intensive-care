@@ -15,7 +15,6 @@ files %>%
   select(-d) %>% 
   tail()
 
-read_excel(paste0())
 
 library(rvest)
 
@@ -33,7 +32,9 @@ dirs_filtered <- dirs %>%
   group_by(d = as.Date(date)) %>% 
   filter(date == max(date)) %>% 
   ungroup() %>% 
-  select(-d)
+  select(-d) %>% 
+  # avoid downloading again
+  filter(date >= as.Date("2020-10-28"))
 
 for (r in 1:nrow(dirs_filtered)) {
   print(r)
@@ -49,9 +50,6 @@ for (r in 1:nrow(dirs_filtered)) {
 }
 
 files <- list.files("bag_excels")
-
-file <- files[22]
-
 
 data <- tibble()
 for (file in files) {

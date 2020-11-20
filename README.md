@@ -1,10 +1,10 @@
 # number of cases and deaths
 
-![](swiss-tests/cases.png)
+![](swiss-tests/cases-nov.png)
 
-![](swiss-tests/deaths.png)
+![](swiss-tests/deaths-nov.png)
 
-![](swiss-tests/deathchance.png)
+![](swiss-tests/deathchance-nov.png)
 
 
 # hospital beds, intensive care beds and COVID-19 cases
