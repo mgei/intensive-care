@@ -5,6 +5,8 @@ library(scales)
 
 # who's dying
 
+updated <- Sys.Date()
+
 # wget https://www.bag.admin.ch/dam/bag/de/dokumente/mt/k-und-i/aktuelle-ausbrueche-pandemien/2019-nCoV/covid-19-basisdaten-fallzahlen.xlsx.download.xlsx/Dashboards_1&2_COVID19_swiss_data_pv.xlsx
 data <- read_excel("data/Dashboards_1&2_COVID19_swiss_data_pv.xlsx")
 
@@ -33,14 +35,14 @@ deaths %>%
   filter(pttoddat != max(pttoddat, na.rm = T)) %>% 
   ggplot(aes(x = pttoddat, y = deaths, color = akl)) +
   geom_line() +
-  geom_text(data = all_time, aes(label = paste0("Tote seit März: ", number(deaths, big.mark = "'", accuracy = 1))), 
-            x = as.Date("2020-04-01"), y = 35, size = 3, color = "#454545", hjust = 0) +
-  geom_text(data = since_june, aes(label = paste0("Tote seit Juni: ", number(deaths, big.mark = "'", accuracy = 1))), 
-            x = as.Date("2020-04-01"), y = 25, size = 3, color = "#454545", hjust = 0) +
+  geom_text(data = all_time, aes(label = paste0("Todesf. seit März: ", number(deaths, big.mark = "'", accuracy = 1))), 
+            x = as.Date("2020-04-01"), y = 35, size = 2.5, color = "#454545", hjust = 0) +
+  geom_text(data = since_june, aes(label = paste0("Todesf. seit Juni: ", number(deaths, big.mark = "'", accuracy = 1))), 
+            x = as.Date("2020-04-01"), y = 25, size = 2.5, color = "#454545", hjust = 0) +
   facet_wrap(~akl) +
-  labs(title = "Anzahl Tote pro Tag",
-       subtitle = "nach Altersklasse, Daten Schweiz: BAG", y = "Anzahl Tote", x = "",
-       caption = "Data BAG, Updated 2020-11-20") +
+  labs(title = "Anzahl Todesfälle pro Tag",
+       subtitle = "nach Altersklasse, Daten Schweiz: BAG", y = "Anzahl Todesfälle", x = "",
+       caption = paste("Data BAG, Updated", updated)) +
   theme_bw() +
   theme(legend.position = "none")
 
@@ -70,7 +72,7 @@ cases %>%
   facet_wrap(~akl) +
   labs(title = "Anzahl Fälle (Positive Tests) pro Tag",
        subtitle = "nach Altersklasse, Daten Schweiz: BAG", y = "Anzahl Positive Tests", x = "",
-       caption = "Data BAG, Updated 2020-11-20") +
+       caption = paste("Data BAG, Updated", updated)) +
   theme_bw() +
   theme(legend.position = "none")
 
@@ -102,15 +104,15 @@ death_share %>%
   ggplot(aes(x = month, y = death_chance, fill = akl)) +
   geom_col() +
   geom_text(data = all_time_deathchance, aes(label = paste0("Tote/Pos. seit März: ", percent(death_change, accuracy = 0.01))), 
-            x = 2.5, y = 0.5, size = 3, color = "#454545", hjust = 0) +
+            x = 2.5, y = 0.5, size = 2.5, color = "#454545", hjust = 0) +
   geom_text(data = since_june_deathchance, aes(label = paste0("Tote/Pos. seit Juni: ", percent(death_change, accuracy = 0.01))), 
-            x = 2.5, y = 0.4, size = 3, color = "#454545", hjust = 0) +
+            x = 2.5, y = 0.4, size = 2.5, color = "#454545", hjust = 0) +
   scale_y_continuous(labels = percent) +
-  scale_x_continuous(breaks = 3:11, labels = c("Mrz", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov")) +
+  scale_x_continuous(breaks = 3:12, labels = 3:12) +
   facet_wrap(~akl) +
   labs(title = "Sterbewahrscheinlichkeit", 
-       subtitle = "nach Altersklasse, Daten Schweiz: BAG", y = "Tote pro Anzahl Positive", x = "",
-       caption = "Data BAG, Updated 2020-11-20") +
+       subtitle = "nach Altersklasse, Daten Schweiz: BAG", y = "Todesfälle pro Anzahl Positive", x = "",
+       caption = paste("Data BAG, Updated", updated)) +
   theme_bw() +
   theme(legend.position = "none")
   
